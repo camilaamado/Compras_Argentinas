@@ -1,1 +1,4 @@
 mock.py
+# Ignorar todos los archivos de la carpeta Raw
+Raw/
+

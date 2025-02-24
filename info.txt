@@ -1,0 +1,167 @@
+INFORMACION QUE VOY RECAUDANDO 
+
+ #============================================
+# 1. Exploración de los Datos
+#============================================
+
+1° Ver las primeras filas del dataset para obtener una visión general
+
+Fecha     Genero  Edad           Medio_de_pago   Tipo_de_tarjeta  Compras_ultimos_6_meses         Provincia  Monto_Compra     Categoria                  Web
+0  2024-04-04   Femenino    67       Tarjeta de débito  American Express                     True  Tierra del Fuego        880486          Ropa  mercadolibre.com.ar
+1  2023-06-25  Masculino    48      Tarjeta de crédito        Mastercard                    False           Córdoba        739447  Electrónicos          fravega.com
+2  2024-01-28  Masculino    29      Tarjeta de crédito              Visa                    False          Misiones        183404         Hogar     tiendabna.com.ar
+3  2023-10-30       Otro    24       Tarjeta de débito              Visa                     True             Jujuy        860619         Otros     tiendabna.com.ar
+4  2023-06-25       Otro    32  Transferencia bancaria           Maestro                    False         Catamarca        702336          Ropa  mercadolibre.com.ar
+
+2° Obtener información general del dataset (tipos de datos, valores nulos, etc.)
+
+Data columns (total 10 columns):
+ #   Column                   Non-Null Count  Dtype 
+---  ------                   --------------  ----- 
+ 0   Fecha                    100 non-null    object
+ 1   Genero                   100 non-null    object
+ 2   Edad                     100 non-null    int64 
+ 3   Medio_de_pago            100 non-null    object
+ 4   Tipo_de_tarjeta          100 non-null    object
+ 5   Compras_ultimos_6_meses  100 non-null    bool  
+ 6   Provincia                100 non-null    object
+ 7   Monto_Compra             100 non-null    int64 
+ 8   Categoria                100 non-null    object
+ 9   Web                      100 non-null    object
+
+
+
+3° Ver los valores nulos y el porcentaje de nulos por columna
+
+dtypes: bool(1), int64(2), object(7)
+memory usage: 7.3+ KB
+None
+                         Missing Values  Percentage
+Fecha                                 0         0.0
+Genero                                0         0.0
+Edad                                  0         0.0
+Medio_de_pago                         0         0.0
+Tipo_de_tarjeta                       0         0.0
+Compras_ultimos_6_meses               0         0.0
+Provincia                             0         0.0
+Monto_Compra                          0         0.0
+Categoria                             0         0.0
+Web                                   0         0.0
+
+4° Verificar los tipos de datos
+Fecha                      object
+Genero                     object
+Edad                        int64
+Medio_de_pago              object
+Tipo_de_tarjeta            object
+Compras_ultimos_6_meses      bool
+Provincia                  object
+Monto_Compra                int64
+Categoria                  object
+Web                        object
+
+5°  Asegurarte de que no hay valores nulos
+No hay valores nulos
+
+6° Frecuencia de categorías en Fecha:
+Fecha
+2023-04-28    3
+2023-11-17    3
+2023-11-24    2
+2023-06-25    2
+2023-10-07    2
+             ..
+2023-06-05    1
+2023-09-24    1
+2024-04-24    1
+2023-11-30    1
+2024-03-05    1
+Name: count, Length: 88, dtype: int64
+--------------------------------------------------
+Frecuencia de categorías en Genero:
+Genero
+Otro         36
+Femenino     33
+Masculino    31
+Name: count, dtype: int64
+--------------------------------------------------
+Frecuencia de categorías en Medio_de_pago:
+Medio_de_pago
+QR                        28
+Tarjeta de débito         27
+Transferencia bancaria    25
+Tarjeta de crédito        20
+Name: count, dtype: int64
+--------------------------------------------------
+Frecuencia de categorías en Tipo_de_tarjeta:
+Tipo_de_tarjeta
+Mastercard          25
+Visa                21
+American Express    20
+Maestro             18
+Naranja             16
+Name: count, dtype: int64
+--------------------------------------------------
+Frecuencia de categorías en Provincia:
+Provincia
+Córdoba                7
+Catamarca              7
+Chaco                  7
+Formosa                6
+Buenos Aires           6
+Misiones               6
+La Rioja               6
+Tierra del Fuego       5
+La Pampa               5
+San Luis               5
+Chubut                 5
+Entre Ríos             5
+Tucumán                4
+Santa Fe               4
+Neuquén                4
+Salta                  3
+San Juan               3
+Santiago del Estero    3
+Río Negro              3
+Mendoza                3
+Corrientes             2
+Jujuy                  1
+Name: count, dtype: int64
+--------------------------------------------------
+Frecuencia de categorías en Categoria:
+Categoria
+Otros           18
+Deportes        16
+Electrónicos    16
+Juguetes        14
+Ropa            13
+Hogar           13
+Belleza         10
+Name: count, dtype: int64
+--------------------------------------------------
+Frecuencia de categorías en Web:
+Web
+musimundo.com          24
+mercadolibre.com.ar    21
+fravega.com            21
+tiendabna.com.ar       20
+dafity.com             14
+Name: count, dtype: int64
+--------------------------------------------------
+
+#####################################################################################################################################3
+
+LIMPIEZA Y TRANSFORMACION DE Datos
+
+SE LIMPIO LOS DATOS, Y SE TRANFORMO LAS VARIABLES CATEGORIAS ASIGNANDO  NUMEROS A CADA UNA, QUEDANDO:
+# 2° Convertir de variables categóricas a numéricas
+dataset['Genero'] = dataset['Genero'].map({'Masculino': 0, 'Femenino': 1, 'Otro': 3})
+dataset['Medio_de_pago'] = dataset['Medio_de_pago'].map({'QR': 0, 'Tarjeta de débito': 1, 'Transferencia bancaria': 2, 'Tarjeta de crédito': 3})
+dataset['Tipo_de_tarjeta'] = dataset['Tipo_de_tarjeta'].map({'Mastercard': 0, 'Visa': 1, 'American Express': 2, 'Maestro': 3, 'Naranja': 4})
+dataset['Provincia'] = dataset['Provincia'].map({'Córdoba': 0, 'Catamarca': 1, 'Chaco': 2, 'Formosa': 3, 'Buenos Aires': 4, 'Misiones': 5, 
+                                       'La Rioja': 6, 'Tierra del Fuego': 7, 'La Pampa': 8, 'San Luis': 9, 'Chubut': 10, 
+                                       'Entre Ríos': 11, 'Tucumán': 12, 'Santa Fe': 13, 'Neuquén': 14, 'Salta': 15, 
+                                       'San Juan': 16, 'Santiago del Estero': 17, 'Río Negro': 18, 'Mendoza': 19, 
+                                       'Corrientes': 20, 'Jujuy': 21})
+dataset['Categoria'] = dataset['Categoria'].map({'Otros': 0, 'Deportes': 1, 'Electrónicos': 2, 'Juguetes': 3, 'Ropa': 4, 'Hogar': 5, 'Belleza': 6})
+dataset['Web'] = dataset['Web'].map({'musimundo.com': 0, 'mercadolibre.com.ar': 1, 'fravega.com': 2, 'tiendabna.com.ar': 3, 'dafity.com': 4})
