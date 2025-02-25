@@ -165,3 +165,78 @@ dataset['Provincia'] = dataset['Provincia'].map({'Córdoba': 0, 'Catamarca': 1, 
                                        'Corrientes': 20, 'Jujuy': 21})
 dataset['Categoria'] = dataset['Categoria'].map({'Otros': 0, 'Deportes': 1, 'Electrónicos': 2, 'Juguetes': 3, 'Ropa': 4, 'Hogar': 5, 'Belleza': 6})
 dataset['Web'] = dataset['Web'].map({'musimundo.com': 0, 'mercadolibre.com.ar': 1, 'fravega.com': 2, 'tiendabna.com.ar': 3, 'dafity.com': 4})
+
+
+
+el data set quedo:
+ Genero  Edad  Medio_de_pago  Tipo_de_tarjeta  Compras_ultimos_6_meses  Provincia  Monto_Compra  Categoria  Web  year  month  day
+0       1    67              1                2                     True          7        880486          4    1  2024      4    4
+1       0    48              3                0                    False          0        739447          2    2  2023      6   25
+2       0    29              3                1                    False          5        183404          5    3  2024      1   28
+3       3    24              1                1                     True         21        860619          0    3  2023     10   30
+4       3    32              2                3                    False          1        702336          4    1  2023      6   25
+
+##########################################################################################################################################
+
+CORRELACION DE LAS VARIABLES CON COMPRA D ELOS ULTIMOS 6 MESES:
+Compras_ultimos_6_meses    1.000000
+day                        0.214360
+Tipo_de_tarjeta            0.146386
+month                      0.141758
+Monto_Compra               0.121262
+Edad                       0.091489
+Provincia                  0.068719
+Medio_de_pago              0.068609
+Web                        0.003521
+Genero                    -0.032675
+year                      -0.093048
+Categoria                 -0.097192
+
+
+
+
+
+
+
+
+📌 Resumen del Flujo
+
+    Preprocesa los datos (convertir variables categóricas a numéricas).
+    Separa en X (características) e y (variable objetivo).
+    Divide los datos en entrenamiento y prueba.
+    Crea y entrena un modelo de árbol de decisión.
+    Evalúa el rendimiento usando métricas adecuadas.
+    Visualiza el árbol para interpretarlo.
+    Si es necesario, ajusta los hiperparámetros para mejorar el modelo.
+
+    #############################################################################################
+
+    #1️⃣ Definir Variables Dependientes e Independientes
+# Definir cuál será la variable objetivo (dependiente) y cuáles serán las variables predictoras (independientes). 
+#predecir si el usuario realizó compras en los últimos 6 meses , si la variable es 1 el usuario realizó compras, si es 0 no realizó compras
+
+
+Accuracy: 0.57
+Confusion Matrix:
+ [[14  3]
+ [10  3]]
+Classification Report:
+               precision    recall  f1-score   support
+
+       False       0.58      0.82      0.68        17
+        True       0.50      0.23      0.32        13
+
+    accuracy                           0.57        30
+   macro avg       0.54      0.53      0.50        30
+weighted avg       0.55      0.57      0.52        30
+
+¡Vas mejorando! Ahora tienes un 57% de accuracy, pero hay algunos problemas clave:
+
+1️⃣ El modelo predice mejor la clase mayoritaria (False)
+
+    Recall para "False" = 82%, lo que significa que captura bien esta clase.
+    Recall para "True" = 23%, lo que significa que tiene problemas identificando a quienes compraron en los últimos 6 meses.
+
+2️⃣ Desbalance de clases sigue afectando la predicción de "True"
+
+    La clase True sigue siendo subrepresentada.
